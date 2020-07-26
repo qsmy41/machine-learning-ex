@@ -1,0 +1,135 @@
+\documentclass[11pt]{report}
+\usepackage[thinc]{esdiff} % for typesettign derivatives
+\usepackage{amsthm} % provides an enhanced version of LaTex's \newtheorem command
+\usepackage{mdframed} % framed environments that can split at page boundaries
+\usepackage{enumitem} % bulletin points or other means of listing things
+\usepackage{amssymb} % for AMS symbols
+\usepackage{amsmath} % so as to use align
+\usepackage{latexsym} % so as to use symbols like \leadsto
+\usepackage{mathrsfs} % for using mathscr for char like operators
+\usepackage{authblk} % for writing affiliations
+\usepackage{graphicx} % for importing images
+\graphicspath{{./images/}} % for the path to images, also always put label behind captions
+\usepackage{textcomp} % for using degree symbol
+\usepackage{hyperref} % for clickable link in the pdf
+
+\theoremstyle{definition}
+\mdfdefinestyle{defEnv}{%
+  hidealllines=false,
+  nobreak=true,
+  innertopmargin=-1ex,
+}
+
+\pagestyle{headings}
+\author{Lectured by Andrew Ng}
+\title{Coursera Machine Learning Notes}
+\affil{Typed by Aris Zhu Yi Qing}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Neural Networks}
+
+\section{Notations}
+\begin{itemize}
+    \item $a^{(i)}_{k}$: activation energy at layer $i$ of element $k$.
+    \item $a^{(L)}$: the activation energy of the last layer,
+        i.e.\ the values in the output layer.
+    \item $\Theta_{ij}^{(l)}$: the weight 
+        between the element $i$ in layer $l + 1$ 
+        and the element $j$ in layer $l$.
+    \item $y$ (or $Y$): target output(s).
+    \item $\hat{y}$ (or $\hat{Y}$): derived output(s), equivalent to $a^{(L)}$.
+\end{itemize} 
+
+\section{Backward Propagation Derivation/Proof}
+As seen in the previous chapters, after deriving $J(\Theta)$, i.e.\ 
+\[
+    J(\Theta) = \frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K} 
+    [-y^{(i)}_{k}\log{((h_{\theta}(x^{(i)}))_{k})
+        - (1 - y_{k}^{(i)})\log{(1 - (h_{\theta}(x^{(i)}))_{k})],
+\]or\[
+J(\Theta) = \frac{1}{m} *
+\mathscr{S}(- Y \;.* \log{(\hat{Y})} - (1 - Y) \;.* \log{(1 - \hat{Y})}),
+\]where $\mathscr{S}$ refers to the sum of all the elements in the matrix,
+and $.*$ refers to element-wise multiplication.
+The next challenge is, as with previous chapters, to find out
+what represents \[
+    \frac{\partial J}{\partial \Theta_{ij}^{(l)}}.
+\]
+For the sake of illustration,
+we are ignoring the regularization terms and dimension incompatibility.
+\medskip
+\\Now the following is where the magic begins. 
+It turns out that
+\begin{align*}
+    \Delta^{(l)} := \frac{\partial J}{\partial \Theta^{(l)}}
+    &= \frac{\partial z^{(l + 1)}}{\partial \Theta^{(l)}} 
+    \frac{\partial J}{\partial z^{(l + 1)}} \\
+    &= \frac{\partial (\Theta^{(l)} * a^{(l)})}{\partial \Theta^{(l)}}
+    \delta^{(l + 1)} \\
+    &= a^{(l)} \delta^{(l + 1)},
+\end{align*} 
+where
+\begin{align*}
+    \delta^{(l)} := \frac{\partial J}{\partial z^{(l)}}
+    &= \frac{\partial z^{(l + 1)}}{\partial z^{(l)}}
+    \frac{\partial J}{\partial z^{(l + 1)}} \\
+    &= \frac{\partial (\Theta^{(l)} * g(z^{(l)}))}{\partial z^{(l)}} 
+    \delta^{(l + 1)} \\
+    &= \delta^{(l + 1)} \Theta^{(l)} g'(z^{(l)})
+\end{align*} 
+and
+\begin{align*}
+    \delta^{(L)}
+    &= \frac{\partial J}{\partial z^{(L)}} \\
+    &= \frac{\partial \hat{y}}{\partial z^{(L)}} 
+    \frac{\partial J}{\partial \hat{y}},
+\end{align*} 
+so we need to figure out the value of the two fractions
+to obtain the ``terminating value'' of the $\delta$s.
+On the other hand, we can also derive this by figuring out
+\begin{equation}\label{eqn:1}
+    \delta^{(L)}_k = \frac{\partial \hat{y}_k}{\partial z^{(L)}_k}
+    \frac{\partial J}{\partial \hat{y}_k}
+\end{equation} 
+and line them up to return to vector form, $\delta^{(L)}$.
+For the sake of clarity of proof, we will use equation~\eqref{eqn:1}.
+\bigskip
+\\ Let's tackle the first fraction.
+Since $\hat{y}_k = \sigma(z^{(L)}_k)$, and
+\begin{align*}
+    \sigma'(z)
+    &= (-1)(1 + e^{-z})^{-2}\frac{\partial (1 + e^{-z})}{\partial z}\\
+    &= \frac{1}{1 + e^{-z}} \cdot \frac{1 + e^{-z} - 1}{1 + e^{-z}} \\
+    &= \sigma(z)(1 - \sigma(z)),
+\end{align*} 
+we can derive that
+\begin{equation}\label{eqn:2}
+    \frac{\partial \hat{y}_k}{\partial z^{(L)}_k} = \hat{y}_k(1 - \hat{y}_k).
+\end{equation} 
+\medskip
+\\Now let's tackle the second fraction. 
+From the provided $J(\Theta)$,
+we look at the $k$-th output,
+and calculate the derivative of the loss with respect to its activation energy:
+(In the following equation, $y_k$ is abbreviated to $y$, 
+$\hat{y}_k$ is abbreviated to $\hat{y}$ for clarity)
+\begin{align*}
+    \frac{\partial J}{\partial \hat{y}}
+    &= -\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}} \\
+    &= \frac{\hat{y}(1 - y) - (1 - \hat{y})y}{\hat{y}(1 - \hat{y})} \\
+    &= \frac{\hat{y} - y}{\hat{y}(1 - \hat{y})}.
+\end{align*} 
+i.e.
+\begin{equation}\label{eqn:3}
+    \frac{\partial J}{\partial \hat{y}_k} 
+    = \frac{\hat{y}_k - y_k}{\hat{y}_k(1 - \hat{y}_k)}
+\end{equation} 
+Substituting equations~\eqref{eqn:2} and \eqref{eqn:3} into~\eqref{eqn:1},
+and convert into vectorized form, we can get that\[
+    \delta^{(L)} = \hat{y} - y.
+\]
+
+
+\end{document}
