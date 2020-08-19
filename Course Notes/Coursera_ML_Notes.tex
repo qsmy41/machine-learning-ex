@@ -75,9 +75,9 @@ where
     \delta^{(l)} := \frac{\partial J}{\partial z^{(l)}}
     &= \frac{\partial z^{(l + 1)}}{\partial z^{(l)}}
     \frac{\partial J}{\partial z^{(l + 1)}} \\
-    &= \frac{\partial (\Theta^{(l)} * g(z^{(l)}))}{\partial z^{(l)}} 
+    &= \frac{\partial (\Theta^{(l + 1)} * g(z^{(l)}))}{\partial z^{(l)}} 
     \delta^{(l + 1)} \\
-    &= \delta^{(l + 1)} \Theta^{(l)} g'(z^{(l)})
+    &= {\Theta^{(l + 1)}}^{(T)} \delta^{(l + 1)} g'(z^{(l)})
 \end{align*} 
 and
 \begin{align*}
