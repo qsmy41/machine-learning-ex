@@ -64,20 +64,20 @@ we are ignoring the regularization terms and dimension incompatibility.
 It turns out that
 \begin{align*}
     \Delta^{(l)} := \frac{\partial J}{\partial \Theta^{(l)}}
-    &= \frac{\partial z^{(l + 1)}}{\partial \Theta^{(l)}} 
-    \frac{\partial J}{\partial z^{(l + 1)}} \\
-    &= \frac{\partial (\Theta^{(l)} * a^{(l)})}{\partial \Theta^{(l)}}
-    \delta^{(l + 1)} \\
-    &= a^{(l)} \delta^{(l + 1)},
+    &= \frac{\partial z^{(l)}}{\partial \Theta^{(l)}} 
+    \frac{\partial J}{\partial z^{(l)}} \\
+    &= \frac{\partial (\Theta^{(l)} * a^{(l - 1)})}{\partial \Theta^{(l)}}
+    \delta^{(l)} \\
+    &= a^{(l - 1)} \delta^{(l)},
 \end{align*} 
 where
 \begin{align*}
     \delta^{(l)} := \frac{\partial J}{\partial z^{(l)}}
     &= \frac{\partial z^{(l + 1)}}{\partial z^{(l)}}
     \frac{\partial J}{\partial z^{(l + 1)}} \\
-    &= \frac{\partial (\Theta^{(l)} * g(z^{(l)}))}{\partial z^{(l)}} 
+    &= \frac{\partial (\Theta^{(l + 1)} * g(z^{(l)}))}{\partial z^{(l)}} 
     \delta^{(l + 1)} \\
-    &= \delta^{(l + 1)} \Theta^{(l)} g'(z^{(l)})
+    &= \delta^{(l + 1)} \Theta^{(l + 1)} g'(z^{(l)})
 \end{align*} 
 and
 \begin{align*}
