@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1597798292 "Coursera_ML_Notes.tex" "Coursera_ML_Notes.pdf" "Coursera_ML_Notes" 1597798292
-  "/dev/null" 1597798292 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1595339579 "Coursera_ML_Notes.tex" "Coursera_ML_Notes.pdf" "Coursera_ML_Notes" 1595339766
+  "/dev/null" 1595339762 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -116,13 +116,13 @@
   "/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1557342064 3277517 23507ed665b4dd9046f0f2a94bbef2be ""
   "/usr/local/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt" 1575557870 4259636 4470f3b48ff1bf35a002f38472464595 ""
   "/usr/local/texlive/2019/texmf.cnf" 1557341546 577 d150fef99ac436ad1156e86b0892f6ef ""
-  "Coursera_ML_Notes.aux" 1597798280 1385 29991d7163e81285eafa723e2beaa4ca "pdflatex"
-  "Coursera_ML_Notes.out" 1597798280 188 fc923d323c8a5a26e1e5f1b72afb6160 "pdflatex"
-  "Coursera_ML_Notes.tex" 1597798292 5093 49c4d81ad54394465fcc1c699def57f3 ""
-  "Coursera_ML_Notes.toc" 1597798280 240 036660ca7c5110b93f0bc8c5623db46f "pdflatex"
+  "Coursera_ML_Notes.aux" 1595339579 1385 29991d7163e81285eafa723e2beaa4ca "pdflatex"
+  "Coursera_ML_Notes.out" 1595339579 188 fc923d323c8a5a26e1e5f1b72afb6160 "pdflatex"
+  "Coursera_ML_Notes.tex" 1595339762 5077 8eb4530452632056c20c1e9c5be3c656 ""
+  "Coursera_ML_Notes.toc" 1595339579 240 036660ca7c5110b93f0bc8c5623db46f "pdflatex"
   (generated)
-  "Coursera_ML_Notes.out"
-  "Coursera_ML_Notes.toc"
-  "Coursera_ML_Notes.pdf"
-  "Coursera_ML_Notes.log"
   "Coursera_ML_Notes.aux"
+  "Coursera_ML_Notes.pdf"
+  "Coursera_ML_Notes.out"
+  "Coursera_ML_Notes.log"
+  "Coursera_ML_Notes.toc"
